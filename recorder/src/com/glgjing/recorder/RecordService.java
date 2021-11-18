@@ -88,6 +88,12 @@ public class RecordService extends Service {
     return true;
   }
 
+  /**
+   * virtualDisplay是api19之后引入  mediaProjection是21之后引入
+   *
+   * 在21之前，使用mediaRecorder进行录屏，需要与surfaceView进行捆绑，即必须将录屏的内容显示出来
+   * 在21之后，android提供了mediaProjection这个api，将录屏和虚拟显示器绑定，解决了之前的问题
+   */
   private void createVirtualDisplay() {
     virtualDisplay = mediaProjection.createVirtualDisplay("MainScreen", width, height, dpi,
         DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mediaRecorder.getSurface(), null, null);
